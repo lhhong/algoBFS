@@ -3,12 +3,11 @@ package com.algo.group2;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Timer;
 
 public class Main {
 
 	public static void main(String argv[]) {
-		final int vertices = 5000;
+		final int vertices = 10000;
 
 		/* THIS CODE REFERS TO PART 2
 		List<BFS> multiBfs = new ArrayList<>();
@@ -35,14 +34,22 @@ public class Main {
 		for (Integer edges : edgesList) {
 			System.out.println("number of edges: " + edges);
 			g = new Graph(vertices, edges);
+			long startTime, endTime = 0;
 
-			System.out.println("Working on vertex... ");
-			long startTime = System.currentTimeMillis();
+			Count c = new Count(Thread.currentThread(), vertices);
+			//System.out.println("Working on vertex... ");
+			startTime = System.currentTimeMillis();
 			for (int i=0; i<vertices; i++) {
-				System.out.print(" " + i);
-				BFS bfs = new BFS(g, i);
+				//System.out.print(" " + i);
+				BFSThread thread = new BFSThread(c,g,i);
+				Thread t = new Thread(thread);
+				t.start();
 			}
-			long endTime = System.currentTimeMillis();
+			try {
+				Thread.sleep(10000000000L);
+			} catch (InterruptedException e) {
+				endTime = System.currentTimeMillis();
+			}
 
 			System.out.println("time taken: " + (endTime - startTime));
 		}

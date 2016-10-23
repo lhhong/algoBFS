@@ -30,7 +30,7 @@ class Graph {
 		return distances[vertice1][vertice2];
 	}
 
-	void storeDist(int vertice1, int vertice2, int dist) {
+	synchronized void storeDist(int vertice1, int vertice2, int dist) {
 		distances[vertice1][vertice2] = dist;
 		distances[vertice2][vertice1] = dist;
 	}
