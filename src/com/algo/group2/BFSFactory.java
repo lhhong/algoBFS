@@ -11,7 +11,7 @@ class BFSFactory {
 			List<Integer> neigbours = bfs.getUndiscoveredLinks(vertice);
 			for (Integer neighbour: neigbours) {
 				Vertice next = vertice.addAndReturnChild(neighbour);
-				bfs.getGraph().storeDist(bfs.getRoot().getId(), neighbour, next.getDistance());
+				bfs.getGraph().storeDist(bfs.getRoot().getId(), neighbour, next.getDistance(), vertice.getId());
 				bfs.enQueue(next);
 			}
 		}

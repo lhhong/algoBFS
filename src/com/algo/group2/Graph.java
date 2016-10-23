@@ -10,6 +10,7 @@ import java.util.List;
 class Graph {
 	private Boolean[][] graph;
 	private Integer[][] distances;
+	private Integer[][] shortestPredecessor;
 	private int vertices;
 	private int edges;
 
@@ -17,22 +18,37 @@ class Graph {
 		this.vertices = vertices;
 		this.edges = edges;
 		distances = new Integer[vertices][vertices];
+		shortestPredecessor = new Integer[vertices][vertices];
 		for (int i = 0; i < vertices; i++) {
 			for (int j = 0; j < vertices; j++) {
 				distances[i][j] = -1;
+				shortestPredecessor[i][j] = -1;
 			}
 			distances[i][i] = 0;
+			shortestPredecessor[i][i] = i;
 		}
 		this.graph = GraphFactory.generateGraph(vertices, edges);
+	}
+
+	List<Integer> getPath(int from, int to) {
+		List<Integer> path = new ArrayList<>();
+		int workingVertice = from;
+		while (workingVertice != to) {
+			path.add(workingVertice);
+			workingVertice = shortestPredecessor[workingVertice][to];
+		}
+		path.add(workingVertice);
+		return path;
 	}
 
 	Integer getDist(int vertice1, int vertice2) {
 		return distances[vertice1][vertice2];
 	}
 
-	synchronized void storeDist(int vertice1, int vertice2, int dist) {
-		distances[vertice1][vertice2] = dist;
-		distances[vertice2][vertice1] = dist;
+	synchronized void storeDist(int from, int to, int dist, int parent) {
+		distances[from][to] = dist;
+		distances[to][from] = dist;
+		shortestPredecessor[to][from] = parent;
 	}
 
 	List<Integer> linkedVetices(int fromVertice) {
