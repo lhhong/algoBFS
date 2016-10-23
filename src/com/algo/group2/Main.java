@@ -46,7 +46,7 @@ public class Main {
 				t.start();
 			}
 			try {
-				Thread.sleep(10000000000L);
+				Thread.sleep(Long.MAX_VALUE);
 			} catch (InterruptedException e) {
 				endTime = System.currentTimeMillis();
 			}
