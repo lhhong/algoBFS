@@ -8,7 +8,7 @@ import java.util.Timer;
 public class Main {
 
 	public static void main(String argv[]) {
-		final int vertices = 500;
+		final int vertices = 5000;
 
 		/* THIS CODE REFERS TO PART 2
 		List<BFS> multiBfs = new ArrayList<>();
@@ -25,19 +25,21 @@ public class Main {
 		System.out.println("number of vertices: " + vertices + "\n");
 
 		List<Integer> edgesList = new ArrayList<>();
-		edgesList.add(100);
-		edgesList.add(500);
 		edgesList.add(1000);
 		edgesList.add(5000);
 		edgesList.add(10000);
+		edgesList.add(50000);
+		edgesList.add(100000);
 
 		Graph g = null;
 		for (Integer edges : edgesList) {
 			System.out.println("number of edges: " + edges);
 			g = new Graph(vertices, edges);
 
+			System.out.println("Working on vertex... ");
 			long startTime = System.currentTimeMillis();
 			for (int i=0; i<vertices; i++) {
+				System.out.print(" " + i);
 				BFS bfs = new BFS(g, i);
 			}
 			long endTime = System.currentTimeMillis();
