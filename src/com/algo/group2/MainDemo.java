@@ -30,8 +30,10 @@ public class MainDemo {
 					BFS bfs = new BFS(graph, BFSFactory.getUndiscovered(multiBfs, vertices));
 					multiBfs.add(bfs);
 					Vertice v = bfs.getRoot();
-					System.out.println("\n\nONE BFS RUN...........\n");
-					printTree(v);
+					//System.out.println("\n\nONE BFS RUN...........\n");
+					//printTree(v);
+					int count = 0;
+					System.out.println("Number of vertices: " + getCount(bfs.getRoot(), count));
 				}
 				break;
 			case 2:
@@ -90,6 +92,8 @@ public class MainDemo {
 							System.out.print("enter root vertice to print: ");
 							BFS bfs = new BFS(g, sc.nextInt());
 							printTree(bfs.getRoot());
+							int count = 0;
+							System.out.println("Number of vertices: " + getCount(bfs.getRoot(), count));
 							break;
 					}
 
@@ -98,6 +102,13 @@ public class MainDemo {
 		}
 	}
 
+	private static int getCount(Vertice v, int count) {
+		count =1;
+		for (Vertice c: v.getChildren()) {
+			count += getCount(c, count);
+		}
+		return count;
+	}
 
 	private static void printTree(Vertice v) {
 		System.out.println("parent: " + v.printString());
