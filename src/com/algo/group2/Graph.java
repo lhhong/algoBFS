@@ -11,6 +11,7 @@ class Graph {
 	private Boolean[][] graph;
 	private Integer[][] distances;
 	private Integer[][] shortestPredecessor;
+	private ArrayList<ArrayList<Integer>> listGraph;
 	private int vertices;
 	private int edges;
 
@@ -28,6 +29,7 @@ class Graph {
 			shortestPredecessor[i][i] = i;
 		}
 		this.graph = GraphFactory.generateGraph(vertices, edges);
+		this.listGraph = GraphFactory.toListGraph(graph, vertices);
 	}
 
 	List<Integer> getPath(int from, int to) {
@@ -51,9 +53,8 @@ class Graph {
 		shortestPredecessor[to][from] = parent;
 	}
 
-	List<Integer> linkedVetices(int fromVertice) {
-		List<Integer> linkedVertices = new ArrayList<>();
-		for (int i = 0; i < fromVertice; i++) {
+	ArrayList<Integer> linkedVetices(Integer fromVertice) {
+		/*for (int i = 0; i < fromVertice; i++) {
 			if (graph[i][fromVertice]) {
 				linkedVertices.add(i);
 			}
@@ -62,8 +63,8 @@ class Graph {
 			if (graph[fromVertice][i]) {
 				linkedVertices.add(i);
 			}
-		}
-		return linkedVertices;
+		}*/
+		return listGraph.get(fromVertice);
 	}
 
 	int getVertices() {

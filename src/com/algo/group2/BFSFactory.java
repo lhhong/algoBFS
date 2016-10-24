@@ -14,6 +14,7 @@ class BFSFactory {
 				bfs.getGraph().storeDist(bfs.getRoot().getId(), neighbour, next.getDistance(), vertice.getId());
 				bfs.enQueue(next);
 			}
+
 		}
 	}
 

@@ -36,14 +36,13 @@ class BFS {
 
 	List<Integer> getUndiscoveredLinks(Vertice vertice) {
 		List<Integer> allLinks = graph.linkedVetices(vertice.getId());
-		ListIterator<Integer> it = allLinks.listIterator();
-		while (it.hasNext()) {
-			Integer vert = it.next();
-			if (discovered.get(vert) == Boolean.TRUE) {
-				it.remove();
+		List<Integer> unDiscovered = new ArrayList<>();
+		for (Integer link : allLinks) {
+			if (discovered.get(link) == Boolean.FALSE) {
+				unDiscovered.add(link);
 			}
 		}
-		return allLinks;
+		return unDiscovered;
 	}
 
 	List<Boolean> getDiscovered() {

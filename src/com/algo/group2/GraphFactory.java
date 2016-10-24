@@ -1,5 +1,9 @@
 package com.algo.group2;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 class GraphFactory {
 
 	static Boolean[][] generateGraph(int vertices, int edges) {
@@ -29,6 +33,22 @@ class GraphFactory {
 			}
 		}
 		return graph;
+	}
+
+	static ArrayList<ArrayList<Integer>> toListGraph(Boolean[][] graph, int vertices) {
+		ArrayList<ArrayList<Integer>> listGraph = new ArrayList<>();
+		for (int i=0; i < vertices; i++) {
+			listGraph.add(new ArrayList<>());
+		}
+		for (int i=0; i < vertices; i++) {
+			for (int j=i+1; j < vertices; j++) {
+				if (graph[i][j]) {
+					listGraph.get(i).add(j);
+					listGraph.get(j).add(i);
+				}
+			}
+		}
+		return listGraph;
 	}
 
 
